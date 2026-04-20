@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0b0c10;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 20px 10%;
+    background: rgba(11, 12, 16, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.navbar a {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+.navbar a:hover, .navbar a.active {
+    animation: textColorShift 10s infinite;
+}
+
+/* --- SECTIONS GENERAL --- */
+section {
+    min-height: 100vh;
+    padding: 10rem 10% 2rem;
+}
+
+.heading {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.heading span {
+    color: #ff00bb;
+    animation: textColorShift 10s infinite;
+}
+
+/* --- HOME SECTION --- */
+.home {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 100px 5% 0; 
+    animation: backgroundShift 10s infinite;
+    gap: 20px;
+}
+
+.home-content-left, .home-content-right {
+    flex: 1;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-content-left {
+    text-align: right; 
+    padding-right: 20px;
+}
+
+.home-content-right {
+    text-align: left; 
+    padding-left: 20px;
+}
+
+.home-content-left h1 {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.home-content-right h3 {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff00bb, #ff0000, #ff00bb);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: colorSyncLogic 10s linear infinite;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, #ff00bb, #ff0000, #ff00bb);
+    background-size: 200%;
+    border-radius: 40px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 20px;
+    width: fit-content;
+    animation: colorSyncLogic 10s linear infinite;
+    cursor: pointer;
+}
+
+/* --- NEON FRAME (RESIZED & SNUG FIT) --- */
+.home-img {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatContainer 5s ease-in-out infinite;
+}
+
+.img-frame {
+    position: relative;
+    /* In-adjust para sakto sa aspect ratio ng image_cfe8e6.jpg */
+    width: 285px; 
+    height: 400px; 
+    border: 5px solid #ff00bb;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b0c10;
+    animation: neonBorderShift 10s infinite;
+    padding: 0; 
+}
+
+.img-frame img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Siksik sa frame nang hindi na-st-stretch */
+    object-position: center;
+}
+
+/* --- ABOUT SECTION --- */
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+/* --- TECH STACK SECTION --- */
+.tech-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tech-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid transparent;
+    transition: 0.5s ease;
+}
+
+.tech-box:hover {
+    border-color: #ff00bb;
+    box-shadow: 0 0 20px #ff00bb;
+    transform: translateY(-10px);
+}
+
+.tech-box span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes neonBorderShift {
+    0%, 45%, 100% { border-color: #ff00bb; box-shadow: 0 0 25px #ff00bb, inset 0 0 10px #ff00bb; }
+    50%, 95% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000, inset 0 0 10px #ff0000; }
+}
+
+@keyframes backgroundShift {
+    0%, 45%, 100% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 187, 0.1), transparent 60%); }
+    50%, 95% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent 60%); }
+}
+
+@keyframes textColorShift {
+    0%, 45%, 100% { color: #ff00bb; text-shadow: 0 0 10px #ff00bb; }
+    50%, 95% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+}
+
+@keyframes colorSyncLogic {
+    0%, 45%, 100% { background-position: 0%; box-shadow: 0 0 15px rgba(255, 0, 187, 0.4); }
+    50%, 95% { background-position: 100%; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+}
+
+@keyframes floatContainer {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- RESPONSIVE BREAKPOINTS (30 POINTS) --- */
+@media (max-width: 768px) {
+    .home {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 120px;
+        height: auto;
+    }
+    .home-content-left, .home-content-right {
+        text-align: center;
+        padding: 0;
+    }
+    .img-frame {
+        width: 240px;
+        height: 320px;
+    }
+    .heading {
+        font-size: 3rem;
+    }
+}
