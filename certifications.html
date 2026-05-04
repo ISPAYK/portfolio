@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications | Harell Diaz</title>
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Harell Diaz</a>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="techstack.html">Tech Stack</a>
+            <a href="certifications.html" class="active">Certifications</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="certifications">
+        <h2 class="heading">My <span>Certifications</span></h2>
+
+        <div class="cert-container">
+            <div class="cert-box">
+                <div class="cert-img-container">
+                    <img src="cert-page1.jpg" id="certDisplay" alt="Software Engineering Certificate" onclick="openModal(this.src)">
+                    
+                    <div class="page-controls">
+                        <button onclick="switchPage('cert-page1.jpg', this)" class="page-btn active">Page 1</button>
+                        <button onclick="switchPage('cert-page2.jpg', this)" class="page-btn">Page 2</button>
+                    </div>
+                </div>
+
+                <div class="cert-label">
+                    <h3>CS302: Software Engineering</h3>
+                    <p>Issued by: <strong>Saylor University</strong></p>
+                    <p>Grade: <strong>80.65%</strong> | <strong>36 Hours</strong></p>
+                    
+                    <div class="cert-buttons">
+                        <button onclick="openModal(document.getElementById('certDisplay').src)" class="btn-small fill">View Work</button>
+                        <a href="https://learn.saylor.org" target="_blank" class="btn-small outline">Verify ID: 3096369185HD</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-box">
+                <div class="cert-img-container">
+                    <img src="cert-word-page1.jpg" alt="Microsoft Office Specialist" onclick="openModal(this.src)">
+                </div>
+
+                <div class="cert-label">
+                    <h3>Word Associate (Microsoft 365)</h3>
+                    <p>Issued by: <strong>Microsoft</strong></p>
+                    <p>Date: <strong>February 20, 2025</strong></p>
+                    
+                    <div class="cert-buttons">
+                        <button onclick="openModal('cert-word-page1.jpg')" class="btn-small fill">View Work</button>
+                        <a href="https://www.credly.com/badges/e0c78ca6-54ba-4a0b-85a7-2dafb314b203/public_url" target="_blank" class="btn-small outline">Verify on Credly</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="certModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgFull">
+    </div>
+
+    <script>
+        // Function para magpalit ng image (Page 1/2) sa loob ng Software Engineering card
+        function switchPage(imgSrc, btn) {
+            document.getElementById('certDisplay').src = imgSrc;
+            const buttons = document.querySelectorAll('.page-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Functions para sa Modal
+        function openModal(src) {
+            const modal = document.getElementById('certModal');
+            const modalImg = document.getElementById('imgFull');
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('certModal').style.display = "none";
+        }
+
+        // Isara ang modal kapag clinic sa labas ng image
+        window.onclick = function(event) {
+            const modal = document.getElementById('certModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
