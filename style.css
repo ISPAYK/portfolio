@@ -160,30 +160,69 @@ section {
     object-fit: cover;
 }
 
-/* --- TECH STACK SECTION --- */
+/* --- TECH STACK SECTION (Updated to Vertical Card Style) --- */
 .tech-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    display: flex; /* Ginawang flex para maging listahan pababa */
+    flex-direction: column;
+    gap: 1.5rem;
     margin-top: 2rem;
+    max-width: 900px; /* Nilimitahan ang lapad para maging pormal */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.tech-box {
+.tech-card-v {
     background: rgba(255, 255, 255, 0.05);
-    padding: 2rem;
+    padding: 1.5rem 2.5rem; /* Mas malapad na padding gaya ng sample */
     border-radius: 1.5rem;
+    display: flex; /* Icon sa kaliwa, text sa kanan */
+    align-items: center;
+    gap: 2rem;
+    border: 2px solid transparent;
+    transition: 0.4s ease;
+    text-align: left; /* Naka-align sa kaliwa ang text */
+}
+
+/* Para sa icons at images sa loob ng card */
+.tech-card-v i, 
+.tech-card-v img {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0; /* Para hindi mapikit ang icon */
+}
+
+/* Container para sa H3 at P */
+.card-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    border: 2px solid transparent;
-    transition: 0.5s ease;
+    gap: 0.3rem;
 }
 
-.tech-box:hover {
+.tech-card-v h3 {
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+.tech-card-v p {
+    font-size: 0.95rem;
+    color: #ccc; /* Kulay ng deskripsyon gaya ng kay Dominic */
+    line-height: 1.5;
+}
+
+.tech-card-v:hover {
     border-color: #ff00bb;
-    box-shadow: 0 0 20px #ff00bb;
-    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(255, 0, 187, 0.2);
+    transform: translateX(10px); /* Usog pakanan imbes na pataas */
+}
+
+/* Category Labels (e.g., Programming Languages) */
+.stack-category {
+    font-size: 1.8rem;
+    color: #ff00bb;
+    margin: 2.5rem 0 1rem;
+    text-align: left;
+    font-weight: 700;
 }
 
 /* --- ANIMATIONS --- */
