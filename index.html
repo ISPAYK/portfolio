@@ -8,37 +8,76 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="hidden-scroll">
 
-    <header class="header">
-        <a href="index.html" class="logo">Harell Diaz</a>
-        <nav class="navbar">
-            <a href="index.html" class="active">Home</a>
-            <a href="about.html">About</a>
-            <a href="techstack.html">Tech Stack</a>
-            <a href="certifications.html">Certifications</a> 
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <section class="home" id="home">
-        <div class="home-content-left">
-            <h1>Hello! I'm</h1>
-            <h1 class="name">Harell Diaz</h1> 
-        </div>
-
-        <div class="home-img">
-            <div class="img-frame">
-                <img src="harellmain.jpg" alt="Harell Diaz Profile">
+    <div id="splashScreen" class="splash-screen">
+        <div class="splash-container">
+            <h3 class="intro-heading">SELECTED WORKS - HARELL DIAZ</h3>
+            
+            <div class="main-text">
+                <h1>Portfolio</h1>
+                <h1 class="year-text">2026</h1>
+            </div>
+            
+            <div class="services-labels">
+                <span class="label">Software Engineering</span>
+                <span class="label">Web Development</span>
             </div>
         </div>
+        <div class="neon-ring ring-top"></div>
+        <div class="neon-ring ring-bottom"></div>
+    </div>
 
-        <div class="home-content-right">
-            <h3>Future Web</h3>
-            <h3 class="role">Developer</h3>
-            <a href="about.html" class="btn">View My Work</a>
-        </div>
-    </section>
+    <div id="mainContent" class="main-content">
+        <header class="header">
+            <a href="index.html" class="logo">Harell Diaz</a>
+            <nav class="navbar">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="techstack.html">Tech Stack</a>
+                <a href="certifications.html">Certifications</a> 
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
 
+        <section class="home" id="home">
+            <div class="home-content-left">
+                <h1>Hello! I'm</h1>
+                <h1 class="name">Harell Diaz</h1> 
+            </div>
+
+            <div class="home-img">
+                <div class="img-frame">
+                    <img src="harellmain.jpg" alt="Harell Diaz Profile">
+                </div>
+            </div>
+
+            <div class="home-content-right">
+                <h3>Future Web</h3>
+                <h3 class="role">Developer</h3>
+                <a href="about.html" class="btn">View My Work</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Transition Logic: Splash Screen to Home
+        window.addEventListener('load', () => {
+            const splash = document.getElementById('splashScreen');
+            const main = document.getElementById('mainContent');
+            
+            // 2.5 seconds na display para sa introduction
+            setTimeout(() => {
+                splash.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    main.classList.add('show-main');
+                    document.body.classList.remove('hidden-scroll');
+                }, 1000); // 1 second fade duration
+
+            }, 2500); 
+        });
+    </script>
 </body>
 </html>

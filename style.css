@@ -1,5 +1,7 @@
+/* --- GLOBAL & INITIAL SETUP --- */
 html {
     overflow-y: scroll;
+    background-color: #0b0c10; /* Sinisiguro na pati html base ay dark */
 }
 
 * {
@@ -12,12 +14,93 @@ html {
 }
 
 body {
-    background: #0b0c10;
+    background-color: #0b0c10 !important; /* Force dark background gaya ng Tech Stack mo */
     color: #fff;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* --- FIXED HEADER --- */
+/* Prevent scroll during splash screen */
+body.hidden-scroll {
+    overflow: hidden;
+}
+
+/* --- 1. SPLASH SCREEN (Introduction) --- */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000; /* Solid black para sa loading transition */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.splash-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.splash-container { 
+    text-align: center; 
+    z-index: 10; 
+}
+
+.intro-heading { 
+    font-size: 1rem;
+    letter-spacing: 5px; 
+    color: #ccc; 
+    margin-bottom: 1rem; 
+    text-transform: uppercase;
+}
+
+.main-text h1 { 
+    font-size: 5rem; 
+    margin: 0; 
+    line-height: 1.1;
+}
+
+.year-text { 
+    font-style: italic; 
+    color: #ff00bb; 
+}
+
+.services-labels {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+
+/* Neon Rings Effect sa Splash */
+.neon-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 0, 187, 0.3);
+    box-shadow: 0 0 30px rgba(255, 0, 187, 0.2);
+}
+.ring-top { width: 500px; height: 500px; top: -10%; left: -10%; }
+.ring-bottom { width: 600px; height: 600px; bottom: -15%; right: -10%; }
+
+/* --- 2. MAIN CONTENT TRANSITION --- */
+.main-content {
+    opacity: 0; 
+    transition: opacity 1s ease;
+}
+
+.main-content.show-main {
+    opacity: 1;
+}
+
+/* --- 3. FIXED HEADER --- */
 .header {
     position: fixed;
     top: 0;
@@ -33,38 +116,25 @@ body {
     z-index: 100;
 }
 
-.logo {
-    font-size: 25px;
-    color: #fff;
-    font-weight: 700;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-}
-
+.logo { font-size: 25px; color: #fff; font-weight: 700; }
+.navbar { display: flex; align-items: center; }
 .navbar a {
     color: #fff;
     font-size: 18px;
     margin-left: 10px; 
     transition: .3s;
-    display: inline-block;
     padding: 10px 15px; 
     font-weight: 500;   
-    text-align: center;
 }
 
-.navbar a:hover, 
-.navbar a.active {
+.navbar a:hover, .navbar a.active {
     color: #ff00bb;      
     text-shadow: 0 0 10px #ff00bb;
 }
 
-/* --- UNIFORM SECTIONS --- */
+/* --- 4. UNIFORM SECTIONS & HOME --- */
 section {
     min-height: 100vh;
-    width: 100%;
     padding: 100px 10% 2rem; 
     display: flex;
     flex-direction: column;
@@ -82,7 +152,6 @@ section {
     animation: textColorShift 10s infinite;
 }
 
-/* --- HOME SECTION --- */
 .home {
     flex-direction: row; 
     justify-content: center; 
@@ -93,7 +162,6 @@ section {
 
 .home-content-left, .home-content-right {
     flex: 1;
-    z-index: 2;
     display: flex;
     flex-direction: column;
 }
@@ -101,10 +169,7 @@ section {
 .home-content-left { text-align: right; }
 .home-content-right { text-align: left; }
 
-.home-content-left h1 {
-    font-size: 50px;
-    font-weight: 700;
-}
+.home-content-left h1 { font-size: 50px; font-weight: 700; }
 
 .home-content-right h3 {
     font-size: 32px;
@@ -130,180 +195,181 @@ section {
     cursor: pointer;
 }
 
-/* --- NEON FRAME --- */
+/* Neon Frame Home */
 .home-img {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     animation: floatContainer 5s ease-in-out infinite;
 }
 
 .img-frame {
-    position: relative;
     width: 285px; 
     height: 400px; 
     border: 5px solid #ff00bb;
     border-radius: 20px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0b0c10;
+    box-shadow: 0 0 25px #ff00bb;
     animation: neonBorderShift 10s infinite;
 }
 
-.img-frame img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+.img-frame img { height: 100%; width: 100%; object-fit: cover; }
+
+/* --- TECH STACK (KEYBOARD STYLE) --- */
+
+.keyboard-base {
+    display: grid;
+    /* Inayos natin para kusa mag-adjust ang row base sa dami ng icons */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+    gap: 20px;
+    padding: 30px;
+    background: #1a1a1a; 
+    border-radius: 20px;
+    box-shadow: 0 10px 0 #0d1117, 0 20px 25px rgba(0,0,0,0.5); 
+    max-width: 800px; /* Nilakihan natin mula 600px para sa bagong icons */
+    margin: 0 auto 3rem; 
+    justify-items: center;
 }
 
-/* --- TECH STACK SECTION (Updated to Vertical Card Style) --- */
-.tech-container {
-    display: flex; /* Ginawang flex para maging listahan pababa */
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    max-width: 900px; /* Nilimitahan ang lapad para maging pormal */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.tech-card-v {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem 2.5rem; /* Mas malapad na padding gaya ng sample */
-    border-radius: 1.5rem;
-    display: flex; /* Icon sa kaliwa, text sa kanan */
-    align-items: center;
-    gap: 2rem;
-    border: 2px solid transparent;
-    transition: 0.4s ease;
-    text-align: left; /* Naka-align sa kaliwa ang text */
-}
-
-/* Para sa icons at images sa loob ng card */
-.tech-card-v i, 
-.tech-card-v img {
-    font-size: 50px;
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0; /* Para hindi mapikit ang icon */
-}
-
-/* Container para sa H3 at P */
-.card-text {
+.key {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    perspective: 1000px;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    align-items: center;
 }
 
-.tech-card-v h3 {
-    font-size: 1.4rem;
+.key-info {
+    display: none;
+}
+
+.keycap {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s ease;
+    box-shadow: 0 8px 0 #1a1a1a, 0 12px 15px rgba(0,0,0,0.4);
+}
+
+/* Para sa icons at images (gaya ng C language) */
+.keycap i, .keycap img {
+    font-size: 35px; 
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+/* --- INTERACTIVE EFFECTS --- */
+
+.key:hover .keycap {
+    transform: translateY(4px); 
+    box-shadow: 0 4px 0 #1a1a1a, 0 0 15px rgba(255, 0, 187, 0.4); 
+}
+
+.key:active .keycap {
+    transform: translateY(8px); 
+    box-shadow: 0 0 0 #1a1a1a;
+}
+
+/* --- HOVER TOOLTIP --- */
+.key::after {
+    content: attr(data-name); 
+    position: absolute;
+    bottom: 120%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: #ff00bb; 
+    color: white; 
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
+    white-space: nowrap;
+    opacity: 0; 
+    pointer-events: none; 
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.key:hover::after {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1; 
+}
+
+/* --- MOBILE POPUP MODAL --- */
+.mobile-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9); 
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #1a1a1a;
     color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid #ff00bb; 
+    text-align: center;
+    width: 90%;
+    max-width: 400px; /* Mas malapad nang kaunti para sa description */
+    box-shadow: 0 0 30px rgba(255, 0, 187, 0.3);
+    position: relative;
 }
 
-.tech-card-v p {
-    font-size: 0.95rem;
-    color: #ccc; /* Kulay ng deskripsyon gaya ng kay Dominic */
-    line-height: 1.5;
+/* Inayos ang Icon sa loob ng Modal */
+#modalBody div i, #modalBody div img {
+    font-size: 6rem;
+    margin-bottom: 1rem;
 }
 
-.tech-card-v:hover {
-    border-color: #ff00bb;
-    box-shadow: 0 0 20px rgba(255, 0, 187, 0.2);
-    transform: translateX(10px); /* Usog pakanan imbes na pataas */
-}
-
-/* Category Labels (e.g., Programming Languages) */
-.stack-category {
-    font-size: 1.8rem;
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 35px;
     color: #ff00bb;
-    margin: 2.5rem 0 1rem;
-    text-align: left;
-    font-weight: 700;
+    cursor: pointer;
 }
 
-/* --- ANIMATIONS --- */
-@keyframes neonBorderShift {
-    0%, 45%, 100% { border-color: #ff00bb; box-shadow: 0 0 25px #ff00bb, inset 0 0 10px #ff00bb; }
-    50%, 95% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000, inset 0 0 10px #ff0000; }
-}
-
-@keyframes backgroundShift {
-    0%, 45%, 100% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 187, 0.1), transparent 60%); }
-    50%, 95% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent 60%); }
-}
-
-@keyframes textColorShift {
-    0%, 45%, 100% { color: #ff00bb; text-shadow: 0 0 10px #ff00bb; }
-    50%, 95% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
-}
-
-@keyframes colorSyncLogic {
-    0%, 45%, 100% { background-position: 0%; box-shadow: 0 0 15px rgba(255, 0, 187, 0.4); }
-    50%, 95% { background-position: 100%; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
-}
-
-@keyframes floatContainer {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* --- RESPONSIVE BREAKPOINTS (30 POINTS) --- */
-
-/* 1. DESKTOP (769px hanggang 1024px pataas) */
-@media (min-width: 769px) {
-    .header { padding: 0 10%; }
-    .home { flex-direction: row; }
-}
-
-/* 2. TABLET (321px hanggang 768px) */
+/* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 768px) {
-    .header { padding: 0 5%; }
-    .navbar a { 
-        font-size: 14px; 
-        padding: 10px 8px; 
-        margin-left: 2px;
+    .keyboard-base {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); 
+        padding: 15px;
+        gap: 10px;
     }
-    .logo { font-size: 20px; }
-    section { padding: 100px 5% 2rem; }
-    .home {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
+    .key {
+        width: 70px;
+        height: 70px;
     }
-    .home-content-left, .home-content-right {
-        text-align: center;
-        order: 2;
+    .keycap i, .keycap img {
+        font-size: 30px;
     }
-    .home-img { order: 1; } /* Image muna sa taas bago text sa mobile/tablet */
-    .heading { font-size: 3.5rem; }
-    .img-frame { width: 260px; height: 350px; }
 }
-
-/* 3. MOBILE (320px pababa) */
-@media (max-width: 320px) {
-    .header { height: 60px; }
-    .logo { font-size: 16px; }
-    .navbar a { font-size: 11px; padding: 5px 4px; }
-    .heading { font-size: 2.5rem; }
-    .home-content-left h1 { font-size: 30px; }
-    .home-content-right h3 { font-size: 20px; }
-    .img-frame { width: 200px; height: 280px; }
-}
-
-/* --- FORMAL CERTIFICATIONS SECTION --- */
+/* --- 6. CERTIFICATIONS & MODALS --- */
 .cert-container {
     display: flex;
     justify-content: center;
     gap: 2.5rem;
     margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 .cert-box {
-    max-width: 450px; /* Sukat */
+    max-width: 450px;
     background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
     border-radius: 1.5rem;
@@ -321,11 +387,10 @@ section {
     transform: translateY(-10px);
 }
 
-/* --- IMAGE & PAGE SWITCHER CONTAINER --- */
 .cert-img-container {
     position: relative;
     width: 100%;
-    height: 220px; /* Professional height */
+    height: 220px;
     overflow: hidden;
     border-radius: 10px;
     background: #0b0c10;
@@ -340,7 +405,6 @@ section {
     cursor: pointer;
 }
 
-/* --- PAGE 1 & 2 BUTTONS OVERLAY --- */
 .page-controls {
     position: absolute;
     bottom: 10px;
@@ -370,58 +434,11 @@ section {
     font-weight: bold;
 }
 
-.page-btn:hover:not(.active) {
-    color: #ff00bb;
-}
+.cert-buttons { display: flex; gap: 10px; justify-content: center; }
+.btn-small { padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+.btn-small.fill { background: #ff00bb; color: #fff; border: none; }
+.btn-small.outline { background: transparent; border: 1px solid #ff00bb; color: #ff00bb; }
 
-/* --- TEXT LABELS --- */
-.cert-label h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.cert-label p {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-bottom: 1.2rem;
-}
-
-/* --- VIEW WORK & VERIFY BUTTONS --- */
-.cert-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.btn-small {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
-    display: inline-block;
-}
-
-.btn-small.fill {
-    background: #ff00bb;
-    color: #fff;
-    border: none;
-}
-
-.btn-small.outline {
-    background: transparent;
-    border: 1px solid #ff00bb;
-    color: #ff00bb;
-    text-decoration: none;
-}
-
-.btn-small:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #ff00bb;
-}
-
-/* --- MODAL POP-UP STYLE --- */
 .modal {
     display: none;
     position: fixed;
@@ -435,19 +452,269 @@ section {
     align-items: center;
 }
 
-.modal-content {
-    max-width: 80%;
-    max-height: 85%;
-    border-radius: 10px;
-    border: 2px solid #ff00bb;
+.modal-content { max-width: 80%; max-height: 85%; border-radius: 10px; border: 2px solid #ff00bb; }
+.close { position: absolute; top: 20px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; }
+
+/* --- CONTACT SECTION STYLE --- */
+.contact-section {
+    min-height: 100vh;
+    padding: 10rem 9% 2rem;
+    background: #0b0c10; /* Match sa body background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
+.contact-container {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.contact-section h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 4.5rem;
     color: #fff;
-    font-size: 40px;
-    font-weight: bold;
+}
+
+.contact-section h2 span {
+    color: #ff00bb; 
+    animation: textColorShift 10s infinite; /* Consistent animation */
+}
+
+.contact-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Glassmorphism Form Card */
+.contact-form {
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.input-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: #fff;
+    background: #161b22; 
+    border-radius: 1rem;
+    border: 1px solid #30363d;
+    transition: 0.3s ease;
+}
+
+/* Neon Glow on Focus */
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: #ff00bb;
+    box-shadow: 0 0 15px rgba(255, 0, 187, 0.5);
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: none;
+    margin-bottom: 2rem;
+}
+
+/* Button na parang Keyboard Key */
+.btn-send {
+    display: inline-block;
+    padding: 1.5rem 4rem;
+    background: #ff00bb;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    border-radius: 1rem;
     cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+    box-shadow: 0 5px 0 #ad007f; 
+}
+
+.btn-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(255, 0, 187, 0.4);
+}
+
+.btn-send:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #ad007f;
+}
+
+/* --- INAYOS NA SOCIAL ICONS (Expand Animation) --- */
+.contact-info h3 {
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column; /* Naka-stack sila paitaas gaya ng sa screenshot mo */
+    gap: 1.5rem;
+    align-items: flex-start; /* Sinisiguro na pantay sila sa kaliwa */
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    width: 55px; /* Box size lang sa simula */
+    height: 55px;
+    background: #161b22; /* Dark background sa simula */
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Smooth bounce effect */
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Pag hinover o tinap ang icon */
+.social-icons {
+    display: flex;
+    flex-direction: column; 
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    width: 55px; 
+    height: 55px;
+    background: #161b22; 
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Linalakihan ang width sa hover para hindi maputol ang text */
+.social-icons a:hover {
+    width: 220px; /* Mula 180px, ginawa nating 220px para sa sapat na space */
+}
+
+.social-icons a .icon {
+    min-width: 55px; 
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icons a i {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.social-icons a span {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 20px; /* Dinagdagan ng padding sa dulo para hindi dikit ang huling letra */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap; 
+}
+
+.social-icons a:hover span {
+    opacity: 1;
+}
+
+/* Brand Colors with Neon Glow */
+.social-icons a.facebook:hover {
+    background: #1877F2;
+    box-shadow: 0 0 25px rgba(24, 119, 242, 0.7);
+}
+.social-icons a.instagram:hover {
+    background: #E4405F;
+    box-shadow: 0 0 25px rgba(228, 64, 95, 0.7);
+}
+.social-icons a.linkedin:hover {
+    background: #0077B5;
+    box-shadow: 0 0 25px rgba(0, 119, 181, 0.7);
+}
+.social-icons a.github:hover {
+    background: #333;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 991px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .input-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- 7. ANIMATIONS KEYFRAMES --- */
+@keyframes neonBorderShift {
+    0%, 45%, 100% { border-color: #ff00bb; box-shadow: 0 0 25px #ff00bb, inset 0 0 10px #ff00bb; }
+    50%, 95% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000, inset 0 0 10px #ff0000; }
+}
+
+@keyframes backgroundShift {
+    0%, 45%, 100% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 187, 0.1), transparent 60%); }
+    50%, 95% { background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1), transparent 60%); }
+}
+
+@keyframes textColorShift {
+    0%, 45%, 100% { color: #ff00bb; text-shadow: 0 0 10px #ff00bb; }
+    50%, 95% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+}
+
+@keyframes colorSyncLogic {
+    0%, 45%, 100% { background-position: 0%; box-shadow: 0 0 15px rgba(255, 0, 187, 0.4); }
+    50%, 95% { background-position: 100%; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+}
+
+@keyframes floatContainer {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- 8. RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 768px) {
+    .header { padding: 0 5%; }
+    .navbar a { font-size: 14px; padding: 10px 8px; }
+    .home { flex-direction: column; text-align: center; gap: 30px; }
+    .home-content-left, .home-content-right { text-align: center; order: 2; }
+    .home-img { order: 1; }
+    .heading { font-size: 3rem; }
+    .img-frame { width: 260px; height: 350px; }
+    .tech-card-v { flex-direction: column; text-align: center; }
 }
