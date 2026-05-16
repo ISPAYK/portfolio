@@ -100,7 +100,13 @@ body.hidden-scroll {
     opacity: 1;
 }
 
-/* --- 3. FIXED HEADER --- */
+/* --- 3. FIXED HEADER (STABLE & DYNAMIC) --- */
+:root {
+    /* Ang variables na ito ang babaguhin ng JS tuwing mag-ta-tap ka */
+    --nav-glow: #ff00bb; 
+    --nav-secondary: #fff0f0; 
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -108,28 +114,157 @@ body.hidden-scroll {
     width: 100%;
     height: 80px; 
     padding: 0 10%; 
-    background: rgba(11, 12, 16, 0.8);
+    background: rgba(11, 12, 16, 0.9);
     backdrop-filter: blur(10px);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo sa kaliwa, Navbar sa kanan */
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.logo { font-size: 25px; color: #fff; font-weight: 700; }
-.navbar { display: flex; align-items: center; }
+.logo { 
+    font-size: 25px; 
+    color: #fff; 
+    font-weight: 700; 
+    text-decoration: none; 
+}
+
+.navbar { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
 .navbar a {
     color: #fff;
+    padding: 8px 18px; 
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    text-decoration: none;
     font-size: 18px;
-    margin-left: 10px; 
-    transition: .3s;
-    padding: 10px 15px; 
-    font-weight: 500;   
+    font-weight: 500;
 }
 
-.navbar a:hover, .navbar a.active {
-    color: #ff00bb;      
-    text-shadow: 0 0 10px #ff00bb;
+
+/* ==========================================================================
+   HOME HERO SECTION MODIFIED CODES (PINALIIT AT IPINWERSA ANG SIZE)
+   ========================================================================== */
+
+.home {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: calc(100vh - 80px);
+    padding: 120px 10% 2rem 10% !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    max-w: 1200px;
+    margin: 0 auto;
+}
+
+/* KONTROLADO AT PINALIIT NA CONTAINER */
+.home-img {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 220px !important;      /* PINALIIT NA SUKAT SA DESKTOP */
+    height: 220px !important;     /* PINALIIT NA SUKAT SA DESKTOP */
+    max-width: 220px !important;
+    max-height: 220px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Perfect at malinis na bilog ng profile picture */
+.img-frame {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    border: 4px solid #ff00bb !important;
+    box-shadow: 0 0 25px rgba(255, 0, 187, 0.6) !important;
+    overflow: hidden !important;
+}
+
+.img-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important; /* INAYOS: Tinutulak paitaas para siguradong kitang-kita ang buhok mo */
+    display: block !important;
+}
+
+.home-content-left, 
+.home-content-right {
+    flex: 1;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, #ff007f, #ff00bb);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 0, 187, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 187, 0.8);
+    transform: scale(1.05);
+}
+
+/* --- RESPONSIVE LAYOUT CONFIGURATION PARA SA CELLPHONE SCREEN --- */
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        padding: 1rem 5%;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .navbar {
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .navbar a {
+        font-size: 15px;
+        padding: 6px 12px;
+    }
+
+    .home {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding-top: 160px !important;
+        gap: 2.5rem !important;
+    }
+
+    .home-content-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Mas compact na profile picture kapag nasa mobile screen */
+    .home-img {
+        width: 180px !important;
+        height: 180px !important;
+        max-width: 180px !important;
+        max-height: 180px !important;
+        order: -1; 
+    }
+}
+/* Dapat laging gumagamit ng variables dito para kapag naging RED ang active link, 
+   magiging RED din ang hover state ng ibang links.
+*/
+.navbar a:hover, 
+.navbar a.active {
+    background: var(--nav-glow) !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px var(--nav-glow), 
+                0 0 30px var(--nav-secondary) !important;
+    transform: translateY(-3px); /* Bahagyang pag-angat */
 }
 
 /* --- 4. UNIFORM SECTIONS & HOME --- */
@@ -212,93 +347,101 @@ section {
 
 .img-frame img { height: 100%; width: 100%; object-fit: cover; }
 
-/* --- TECH STACK (KEYBOARD STYLE) --- */
-
-.keyboard-base {
-    display: grid;
-    /* Inayos natin para kusa mag-adjust ang row base sa dami ng icons */
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
-    gap: 20px;
-    padding: 30px;
-    background: #1a1a1a; 
-    border-radius: 20px;
-    box-shadow: 0 10px 0 #0d1117, 0 20px 25px rgba(0,0,0,0.5); 
-    max-width: 800px; /* Nilakihan natin mula 600px para sa bagong icons */
-    margin: 0 auto 3rem; 
-    justify-items: center;
+/* --- NAVIGATION GLOW (ACTIVE) --- */
+.navbar a.active {
+    color: #fff !important;
+    background: #ff00bb; /* Kulay ng neon pink sa screenshot mo */
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 0, 187, 0.8), 0 0 30px rgba(255, 0, 187, 0.4);
+    transition: all 0.3s ease;
 }
 
+/* --- TECH STACK GRID --- */
+/* Inalis natin ang .keyboard-base para sumunod sa Tailwind Grid mo na md:grid-cols-4 */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* --- KEY / CARD STYLE (Ibinalik sa Magandang Sukat) --- */
 .key {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%; /* Sumunod sa grid cell width */
+    height: 160px; /* Tamang taas para sa orihinal mong layout */
     cursor: pointer;
     perspective: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background: #111827 !important; /* bg-gray-900 */
+    border: 1px solid #374151; /* border-gray-700 */
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
 .key-info {
-    display: none;
+    display: none; /* Para sa JavaScript Modal mo */
 }
 
+/* --- KEYCAP / ICON CONTAINER --- */
 .keycap {
     width: 100%;
     height: 100%;
-    background: #333;
-    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.15s ease;
-    box-shadow: 0 8px 0 #1a1a1a, 0 12px 15px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    z-index: 1;
 }
 
-/* Para sa icons at images (gaya ng C language) */
-.keycap i, .keycap img {
-    font-size: 35px; 
-    width: 35px;
-    height: 35px;
+/* Icons at Images (Sakto ang laki, hindi siksik) */
+.keycap i {
+    font-size: 50px !important; /* Laking orihinal */
+}
+
+.keycap img {
+    width: 48px;
+    height: 48px;
     object-fit: contain;
 }
 
-/* --- INTERACTIVE EFFECTS --- */
+/* --- INTERACTIVE EFFECTS (Keyboard Press & Glow) --- */
+.key:hover {
+    transform: translateY(-4px); /* Umaangat ng konti pag hover */
+    box-shadow: 0 0 20px rgba(255, 0, 187, 0.3); /* May pink glow ang paligid */
+}
+
+/* Kung anong section color (Pink/Blue/Green), yun ang mag-g-glow sa border */
+.key.hover\:border-pink-500:hover { border-color: #ec4899 !important; }
+.key.hover\:border-blue-500:hover { border-color: #3b82f6 !important; }
+.key.hover\:border-green-500:hover { border-color: #22c55e !important; }
+
+/* --- THE OVERLAY EFFECT (Yung text na lumalabas sa Hover) --- */
+.key-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 7, 18, 0.95); /* bg-gray-950/95 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.key:hover .key-overlay {
+    opacity: 1;
+}
 
 .key:hover .keycap {
-    transform: translateY(4px); 
-    box-shadow: 0 4px 0 #1a1a1a, 0 0 15px rgba(255, 0, 187, 0.4); 
-}
-
-.key:active .keycap {
-    transform: translateY(8px); 
-    box-shadow: 0 0 0 #1a1a1a;
-}
-
-/* --- HOVER TOOLTIP --- */
-.key::after {
-    content: attr(data-name); 
-    position: absolute;
-    bottom: 120%; 
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #ff00bb; 
-    color: white; 
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
-    white-space: nowrap;
-    opacity: 0; 
-    pointer-events: none; 
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.key:hover::after {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1; 
+    opacity: 0.1; /* Lumalabo ang icon sa likod ng overlay */
 }
 
 /* --- MOBILE POPUP MODAL --- */
@@ -359,7 +502,45 @@ section {
         font-size: 30px;
     }
 }
-/* --- 6. CERTIFICATIONS & MODALS --- */
+/* --- STABLE NAVIGATION BAR (EKSAKTONG TUGMA SA ABOUT AT TECH STACK) --- */
+.header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 1.5rem 10%; 
+    background: transparent;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.navbar a { 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+/* Ang nag-iilaw na pink pill button na eksaktong kapareho ng About */
+.navbar a.active { 
+    background: #ff007f; /* Solid pink, hindi gradient */
+    color: #fff !important;
+    padding: 0.5rem 1.2rem; /* Saktong sukat ng kapsula */
+    border-radius: 9999px; /* Perpektong bilog */
+    font-weight: 700; 
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6); /* Swabeng neon glow */
+}
+
+/* Responsive adjustment para sa mobile navigation view */
+@media (max-width: 768px) {
+    .header { padding: 1.5rem 5%; flex-direction: column; gap: 1rem; }
+    .navbar { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .navbar a { font-size: 0.9rem; }
+    .navbar a.active { padding: 0.4rem 1rem; }
+}
+
+/* --- 6. CERTIFICATIONS & MODALS (GINAWANG TECH STACK STYLE) --- */
 .cert-container {
     display: flex;
     justify-content: center;
@@ -370,21 +551,22 @@ section {
 
 .cert-box {
     max-width: 450px;
-    background: rgba(255, 255, 255, 0.05);
+    background: #111827 !important; /* Binago: Parehong bg-gray-900 ng techstack */
     padding: 1.5rem;
-    border-radius: 1.5rem;
+    border-radius: 12px; /* Binago: 12px round corners para katulad ng keycards niyo */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: 2px solid transparent;
-    transition: 0.5s ease;
+    border: 1px solid #374151; /* Binago: border-gray-700 para malinis tingnan sa una */
+    transition: all 0.3s ease;
 }
 
+/* Kopyang-kopya ang hover effect mula sa iyong Tech Stack key:hover */
 .cert-box:hover {
-    border-color: #ff00bb;
-    box-shadow: 0 0 20px #ff00bb;
-    transform: translateY(-10px);
+    border-color: #ec4899 !important; /* border-pink-500 katulad ng techstack mo */
+    box-shadow: 0 0 20px rgba(255, 0, 187, 0.3); /* Swabeng pink glow, hindi sabog */
+    transform: translateY(-4px); /* Umaangat ng saktong 4px katulad ng panel panels mo */
 }
 
 .cert-img-container {
@@ -429,16 +611,18 @@ section {
     transition: 0.3s;
 }
 
-.page-btn.active {
-    background: #ff00bb;
+/* Binago ang pangalan mula sa .active para hindi mag-conflict sa navbar mo */
+.page-btn.page-active {
+    background: #ff007f;
     font-weight: bold;
 }
 
 .cert-buttons { display: flex; gap: 10px; justify-content: center; }
 .btn-small { padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-.btn-small.fill { background: #ff00bb; color: #fff; border: none; }
-.btn-small.outline { background: transparent; border: 1px solid #ff00bb; color: #ff00bb; }
+.btn-small.fill { background: #ff007f; color: #fff; border: none; }
+.btn-small.outline { background: transparent; border: 1px solid #ff007f; color: #ff007f; }
 
+/* --- MOBILE POPUP MODAL (TECH STACK MODAL STYLE) --- */
 .modal {
     display: none;
     position: fixed;
@@ -452,10 +636,16 @@ section {
     align-items: center;
 }
 
-.modal-content { max-width: 80%; max-height: 85%; border-radius: 10px; border: 2px solid #ff00bb; }
+.modal-content { 
+    max-width: 80%; 
+    max-height: 85%; 
+    border-radius: 20px; /* Mas pabilog na kanto katulad ng techstack mo */
+    border: 2px solid #ff00bb; 
+    box-shadow: 0 0 30px rgba(255, 0, 187, 0.3); /* May glow effect na rin ang modal niyo */
+}
 .close { position: absolute; top: 20px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-/* --- CONTACT SECTION STYLE --- */
+/* --- CONTACT SECTION STYLE (SAME STYLE MULA SA TECH STACK AT ABOUT ME) --- */
 .contact-section {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
@@ -563,7 +753,7 @@ section {
     box-shadow: 0 1px 0 #ad007f;
 }
 
-/* --- INAYOS NA SOCIAL ICONS (Expand Animation) --- */
+/* --- HIGH STABILITY SOCIAL LINKS (TECH STACK BLOCK CARD STYLE) --- */
 .contact-info h3 {
     font-size: 2.8rem;
     color: #fff;
@@ -572,56 +762,31 @@ section {
 
 .social-icons {
     display: flex;
-    flex-direction: column; /* Naka-stack sila paitaas gaya ng sa screenshot mo */
-    gap: 1.5rem;
-    align-items: flex-start; /* Sinisiguro na pantay sila sa kaliwa */
-}
-
-.social-icons a {
-    display: flex;
-    align-items: center;
-    width: 55px; /* Box size lang sa simula */
-    height: 55px;
-    background: #161b22; /* Dark background sa simula */
-    border-radius: 50px;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Smooth bounce effect */
-    overflow: hidden;
-    text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Pag hinover o tinap ang icon */
-.social-icons {
-    display: flex;
     flex-direction: column; 
     gap: 1.5rem;
-    align-items: flex-start;
+    width: 100%;
 }
 
 .social-icons a {
     display: flex;
     align-items: center;
-    width: 55px; 
-    height: 55px;
+    gap: 2rem; /* Distansya ng icon sa mismong text */
+    width: 100%; /* Pwersadong mahaba para sakupin ang buong space katulad ng cards mo */
+    padding: 1.2rem 2rem; /* Makapal at solid na card structures */
     background: #161b22; 
-    border-radius: 50px;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    overflow: hidden;
+    border-radius: 16px; /* Swabeng kurbada kapareho ng Tech Stack cards mo */
+    border: 1px solid #30363d;
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Linalakihan ang width sa hover para hindi maputol ang text */
-.social-icons a:hover {
-    width: 220px; /* Mula 180px, ginawa nating 220px para sa sapat na space */
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Swabeng 0.3s transition para sa translateY at glow */
 }
 
 .social-icons a .icon {
-    min-width: 55px; 
-    height: 55px;
+    font-size: 2.5rem; /* Malaki at malinaw na social brand icon sizing */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0; /* Anti-distort shield para hindi mapipi ang icon square box natin */
 }
 
 .social-icons a i {
@@ -633,11 +798,37 @@ section {
     font-size: 1.8rem;
     font-weight: 500;
     color: #fff;
-    padding-left: 10px;
-    padding-right: 20px; /* Dinagdagan ng padding sa dulo para hindi dikit ang huling letra */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap; 
+    opacity: 1; /* Permanenteng litaw ang text name simula pa lang */
+    white-space: nowrap; /* Hinding-hindi papayagang mahati o bumaba ang salita kahit kailan */
+}
+
+/* --- BRAND HOVER EFFECTS: MATITINDING NEON BACKGROUND GLOWS --- */
+.social-icons a.facebook:hover {
+    border-color: #1877F2;
+    background: rgba(24, 119, 242, 0.05);
+    box-shadow: 0 0 25px rgba(24, 119, 242, 0.5);
+    transform: translateY(-5px); /* Smooth rise action paitaas katulad ng panel lines mo */
+}
+
+.social-icons a.instagram:hover {
+    border-color: #E4405F;
+    background: rgba(228, 64, 95, 0.05);
+    box-shadow: 0 0 25px rgba(228, 64, 95, 0.5);
+    transform: translateY(-5px);
+}
+
+.social-icons a.linkedin:hover {
+    border-color: #0077B5;
+    background: rgba(0, 119, 181, 0.05);
+    box-shadow: 0 0 25px rgba(0, 119, 181, 0.5);
+    transform: translateY(-5px);
+}
+
+.social-icons a.github:hover {
+    border-color: #ff00bb; /* Pink terno glow para sa global profile branding mo */
+    background: rgba(255, 0, 187, 0.05);
+    box-shadow: 0 0 25px rgba(255, 0, 187, 0.5);
+    transform: translateY(-5px);
 }
 
 .social-icons a:hover span {
@@ -717,4 +908,91 @@ section {
     .heading { font-size: 3rem; }
     .img-frame { width: 260px; height: 350px; }
     .tech-card-v { flex-direction: column; text-align: center; }
+}
+
+/* --- 4. TEXT & TYPEWRITER ANIMATIONS --- */
+
+/* Default state para sa regular elements */
+.animate-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+/* Force visible ang typewriter container para hindi blanko ang screen */
+.typewriter-container.animate-text {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* State kapag "In View" (Papasok) */
+.animate-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* State kapag "Out" (Lalabas paitaas) */
+.animate-text.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+/* --- TYPEWRITER SPECIFIC STYLES --- */
+
+/* Siguraduhin na may nakalaang space para sa text */
+.typewriter-container {
+    min-height: 120px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.typewriter-container h1 {
+    min-height: 1.2em;
+    display: block;
+    color: #fff; /* Siguraduhin na puti ang kulay */
+}
+
+/* Ang Blinking Cursor (|) */
+#typewriter-prefix::after,
+#typewriter-name::after {
+    content: "|";
+    margin-left: 5px;
+    color: var(--nav-glow, #ff00bb); /* Default pink kung wala pang kulay */
+    animation: blink 0.7s infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Cursor Blink Animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- OPTIONAL: REVEAL CLASS --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal {
+    animation: fadeInUp 1s forwards;
+}
+
+/* Delay para sa image para mas swabe ang transition */
+.home-img.animate-text {
+    transition-delay: 0.3s;
+    opacity: 0; /* Magsisimula sa invisible */
+}
+
+.home-img.animate-text.show {
+    opacity: 1; /* Lilitaw lang pag 'show' na */
 }

@@ -5,20 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harell Diaz | Web Portfolio</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        body { font-family: 'Poppins', sans-serif; background-color: #0b0c10; color: #fff; }
+
+        /* --- SAKTONG NAVIGATION BAR (PAREHO SA TECH STACK AT ABOUT) --- */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1.5rem 10%; 
+            background: transparent;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .navbar a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .navbar a.active { 
+            background: linear-gradient(90deg, #ff007f, #ff00bb);
+            color: #fff;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(255, 0, 187, 0.7), 0 0 40px rgba(255, 0, 187, 0.4);
+        }
+
+        /* --- RESPONSIVE ADJUSTMENT PARA SA CP --- */
+        @media (max-width: 768px) {
+            .header { padding: 1.5rem 5%; flex-direction: column; gap: 1rem; }
+            .navbar { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .navbar a { font-size: 0.9rem; }
+            .navbar a.active { padding: 0.4rem 1rem; }
+        }
+    </style>
 </head>
-<body class="hidden-scroll">
+<body class="hidden-scroll bg-[#0b0c10] text-white">
 
     <div id="splashScreen" class="splash-screen">
         <div class="splash-container">
-            <h3 class="intro-heading">SELECTED WORKS - HARELL DIAZ</h3>
-            
+            <h3 class="intro-heading">WELCOME TO MY </h3>
             <div class="main-text">
                 <h1>Portfolio</h1>
                 <h1 class="year-text">2026</h1>
             </div>
-            
             <div class="services-labels">
                 <span class="label">Software Engineering</span>
                 <span class="label">Web Development</span>
@@ -30,7 +75,7 @@
 
     <div id="mainContent" class="main-content">
         <header class="header">
-            <a href="index.html" class="logo">Harell Diaz</a>
+            <a href="index.html" class="logo font-orbitron text-2xl font-bold">Harell Diaz</a>
             <nav class="navbar">
                 <a href="index.html" class="active">Home</a>
                 <a href="about.html">About</a>
@@ -41,32 +86,75 @@
         </header>
 
         <section class="home" id="home">
-            <div class="home-content-left">
-                <h1>Hello! I'm</h1>
-                <h1 class="name">Harell Diaz</h1> 
+            
+            <div class="home-content-left typewriter-container animate-text show">
+                <h1 class="font-orbitron" style="font-size: 2.2rem; min-height: 45px;"><span id="typewriter-prefix"></span></h1>
+                <h1 class="name font-orbitron" style="font-size: 3rem; color: #ff00bb; min-height: 60px;"><span id="typewriter-name"></span></h1> 
             </div>
 
-            <div class="home-img">
+            <div class="home-img animate-text show">
                 <div class="img-frame">
                     <img src="harellmain.jpg" alt="Harell Diaz Profile">
                 </div>
             </div>
 
-            <div class="home-content-right">
-                <h3>Future Web</h3>
-                <h3 class="role">Developer</h3>
-                <a href="about.html" class="btn">View My Work</a>
+            <div class="home-content-right animate-text show">
+                <h3 class="font-orbitron" style="font-size: 2.5rem; font-weight: bold;">Future Web</h3>
+                <h3 class="role font-orbitron" style="font-size: 2.5rem; color: #ff00bb; font-weight: bold; drop-shadow: 0 0 10px rgba(255,0,187,0.4);">Developer</h3>
+                <div style="margin-top: 1.5rem;">
+                    <a href="about.html" class="btn">View My Work</a>
+                </div>
             </div>
         </section>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="tech-stack-script.js"></script>
+
     <script>
-        // Transition Logic: Splash Screen to Home
+        // Override function sa index para maging sunod-sunod ang pasok ng text mo
+        function runSequentialTypewriter() {
+            const prefixEl = document.getElementById("typewriter-prefix");
+            const nameEl = document.getElementById("typewriter-name");
+            
+            if (!prefixEl || !nameEl) return;
+            
+            prefixEl.innerHTML = "";
+            nameEl.innerHTML = "";
+            isTyping = true;
+            if (typeof clearAllTimeouts === 'function') clearAllTimeouts();
+
+            let i = 0;
+            // Unang Bugso: I-type muna ang "Hello! I'm"
+            function typePrefix() {
+                if (i < prefixText.length) {
+                    prefixEl.innerHTML += prefixText.charAt(i);
+                    i++;
+                    typeTimeouts.push(setTimeout(typePrefix, 100)); // Bilis ng unang linya
+                } else {
+                    // PAGKATAPOS: Kapag tapos na ang unang linya, dito pa lang magsisimula si "Harell Diaz"
+                    setTimeout(runNameTypewriter, 400); // 400ms na swabeng pahinga bago sumunod ang pangalan
+                }
+            }
+
+            let j = 0;
+            function runNameTypewriter() {
+                if (j < nameText.length) {
+                    nameEl.innerHTML += nameText.charAt(j);
+                    j++;
+                    typeTimeouts.push(setTimeout(runNameTypewriter, 100)); // Bilis ng pangalan mo
+                }
+            }
+
+            // Simulan ang unang animation 200ms pagkabukas ng page mula sa splash
+            setTimeout(typePrefix, 200);
+        }
+
         window.addEventListener('load', () => {
             const splash = document.getElementById('splashScreen');
             const main = document.getElementById('mainContent');
             
-            // 2.5 seconds na display para sa introduction
             setTimeout(() => {
                 splash.classList.add('fade-out');
                 
@@ -74,8 +162,11 @@
                     splash.style.display = 'none';
                     main.classList.add('show-main');
                     document.body.classList.remove('hidden-scroll');
-                }, 1000); // 1 second fade duration
-
+                    
+                    // Pinapatakbo ang bagong sequential function para swabe ang labs
+                    runSequentialTypewriter();
+                    
+                }, 1000); 
             }, 2500); 
         });
     </script>
