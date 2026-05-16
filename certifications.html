@@ -11,7 +11,6 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
     
     <style>
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
@@ -215,23 +214,23 @@
                 text-align: center;
             }
             .cert-box {
-                flex-direction: column; /* Ginagawang patayo ang layout para sumakto sa screen ng CP */
+                flex-direction: column; 
                 padding: 1.2rem;
                 gap: 1.5rem;
             }
             .cert-img-container {
-                max-width: 100%; /* Sinasakop ang buong lapad ng mobile para malinaw tingnan */
+                max-width: 100%; 
             }
             .cert-label h3 {
                 font-size: 1.4rem;
             }
             .cert-buttons {
-                flex-direction: column; /* Pinagpapatong ang mga buttons para maluwag pindutin sa touch screen */
+                flex-direction: column; 
                 gap: 0.8rem;
                 width: 100%;
             }
             .btn-small {
-                width: 100%; /* Sakop ang buong lapad para madaling ma-click ng daliri */
+                width: 100%; 
             }
             .close {
                 top: 15px;
@@ -283,7 +282,7 @@
 
             <div class="cert-box">
                 <div class="cert-img-container">
-                    <img src="cert-word-page1.jpg" alt="Microsoft Office Specialist" onclick="openModal(this.src)">
+                    <img src="cert-word-page1.jpg" id="wordDisplay" alt="Microsoft Office Specialist" onclick="openModal(this.src)">
                 </div>
 
                 <div class="cert-label text-left md:text-left">
@@ -292,7 +291,7 @@
                     <p>Date: <strong>February 20, 2025</strong></p>
                     
                     <div class="cert-buttons">
-                        <button onclick="openModal('cert-word-page1.jpg')" class="btn-small fill font-orbitron">View Work</button>
+                        <button onclick="openModal(document.getElementById('wordDisplay').src)" class="btn-small fill font-orbitron">View Work</button>
                         <a href="https://www.credly.com/badges/e0c78ca6-54ba-4a0b-85a7-2dafb314b203/public_url" target="_blank" class="btn-small outline font-orbitron">Verify on Credly</a>
                     </div>
                 </div>
@@ -300,6 +299,44 @@
         </div>
     </section>
 
-    <div id="certModal" class="modal" onclick="closeModal()">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="imgFull
+    <div id="certModal" class="modal" onclick="closeModal(event)">
+        <span class="close" onclick="closeModal(event)">&times;</span>
+        <img class="modal-content" id="imgFull" src="" alt="Full View Certificate">
+    </div>
+
+    <script>
+        // Function para magpalit ng Page 1 at Page 2 ng Certificate Image
+        function switchPage(imageSrc, button) {
+            const certImg = document.getElementById('certDisplay');
+            certImg.src = imageSrc;
+
+            // Alisin ang 'active' class sa ibang buttons sa loob ng parehong control stack
+            const buttons = button.parentElement.querySelectorAll('.page-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Idagdag ang 'active' class sa pinindot na button
+            button.classList.add('active');
+        }
+
+        // Function para buksan ang full screen view modal
+        function openModal(imageSrc) {
+            const modal = document.getElementById('certModal');
+            const fullImg = document.getElementById('imgFull');
+            
+            fullImg.src = imageSrc;
+            modal.style.display = "flex";
+        }
+
+        // Function para isara ang modal kapag kinlik ang close button o sa labas ng image
+        function closeModal(event) {
+            const modal = document.getElementById('certModal');
+            const fullImg = document.getElementById('imgFull');
+            
+            // Isasara lang ang modal kung ang kinlik ay ang background o ang X button (hindi yung mismong certificate image)
+            if (event.target === modal || event.target.classList.contains('close')) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
