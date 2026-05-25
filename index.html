@@ -17,6 +17,15 @@
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
         body { font-family: 'Poppins', sans-serif; background-color: #0b0c10; color: #fff; }
 
+        /* --- INTERNAL PREPARATION PARA SA SPLASH LOGIC --- */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .main-content.show-main {
+            opacity: 1 !important;
+        }
+
         /* --- SAKTONG NAVIGATION BAR (PAREHO SA TECH STACK AT ABOUT) --- */
         .header { 
             display: flex; 
@@ -86,21 +95,20 @@
         </header>
 
         <section class="home" id="home">
-            
-            <div class="home-content-left typewriter-container animate-text show">
+            <div class="home-content-left typewriter-container animate-text">
                 <h1 class="font-orbitron" style="font-size: 2.2rem; min-height: 45px;"><span id="typewriter-prefix"></span></h1>
                 <h1 class="name font-orbitron" style="font-size: 3rem; color: #ff00bb; min-height: 60px;"><span id="typewriter-name"></span></h1> 
             </div>
 
-            <div class="home-img animate-text show">
+            <div class="home-img animate-text">
                 <div class="img-frame">
-                    <img src="harellmain.jpg" alt="Harell Diaz Profile">
+                    <img src="images/harellmain.jpg" alt="Harell Diaz Profile">
                 </div>
             </div>
 
-            <div class="home-content-right animate-text show">
+            <div class="home-content-right animate-text">
                 <h3 class="font-orbitron" style="font-size: 2.5rem; font-weight: bold;">Future Web</h3>
-                <h3 class="role font-orbitron" style="font-size: 2.5rem; color: #ff00bb; font-weight: bold; drop-shadow: 0 0 10px rgba(255,0,187,0.4);">Developer</h3>
+                <h3 class="role font-orbitron" style="font-size: 2.5rem; color: #ff00bb; font-weight: bold; text-shadow: 0 0 10px rgba(255, 0, 187, 0.6);">Developer</h3>
                 <div style="margin-top: 1.5rem;">
                     <a href="about.html" class="btn">View My Work</a>
                 </div>
@@ -110,65 +118,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="tech-stack-script.js"></script>
-
-    <script>
-        // Override function sa index para maging sunod-sunod ang pasok ng text mo
-        function runSequentialTypewriter() {
-            const prefixEl = document.getElementById("typewriter-prefix");
-            const nameEl = document.getElementById("typewriter-name");
-            
-            if (!prefixEl || !nameEl) return;
-            
-            prefixEl.innerHTML = "";
-            nameEl.innerHTML = "";
-            isTyping = true;
-            if (typeof clearAllTimeouts === 'function') clearAllTimeouts();
-
-            let i = 0;
-            // Unang Bugso: I-type muna ang "Hello! I'm"
-            function typePrefix() {
-                if (i < prefixText.length) {
-                    prefixEl.innerHTML += prefixText.charAt(i);
-                    i++;
-                    typeTimeouts.push(setTimeout(typePrefix, 100)); // Bilis ng unang linya
-                } else {
-                    // PAGKATAPOS: Kapag tapos na ang unang linya, dito pa lang magsisimula si "Harell Diaz"
-                    setTimeout(runNameTypewriter, 400); // 400ms na swabeng pahinga bago sumunod ang pangalan
-                }
-            }
-
-            let j = 0;
-            function runNameTypewriter() {
-                if (j < nameText.length) {
-                    nameEl.innerHTML += nameText.charAt(j);
-                    j++;
-                    typeTimeouts.push(setTimeout(runNameTypewriter, 100)); // Bilis ng pangalan mo
-                }
-            }
-
-            // Simulan ang unang animation 200ms pagkabukas ng page mula sa splash
-            setTimeout(typePrefix, 200);
-        }
-
-        window.addEventListener('load', () => {
-            const splash = document.getElementById('splashScreen');
-            const main = document.getElementById('mainContent');
-            
-            setTimeout(() => {
-                splash.classList.add('fade-out');
-                
-                setTimeout(() => {
-                    splash.style.display = 'none';
-                    main.classList.add('show-main');
-                    document.body.classList.remove('hidden-scroll');
-                    
-                    // Pinapatakbo ang bagong sequential function para swabe ang labs
-                    runSequentialTypewriter();
-                    
-                }, 1000); 
-            }, 2500); 
-        });
-    </script>
 </body>
 </html>

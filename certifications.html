@@ -260,11 +260,11 @@
         <div class="cert-container">
             <div class="cert-box">
                 <div class="cert-img-container">
-                    <img src="cert-page1.jpg" id="certDisplay" alt="Software Engineering Certificate" onclick="openModal(this.src)">
+                    <img src="images/cert-page1.jpg" id="certDisplay" alt="Software Engineering Certificate" onclick="openModal(this.src)">
                     
                     <div class="page-controls">
-                        <button onclick="switchPage('cert-page1.jpg', this)" class="page-btn active">Page 1</button>
-                        <button onclick="switchPage('cert-page2.jpg', this)" class="page-btn">Page 2</button>
+                        <button onclick="switchPage('images/cert-page1.jpg', this)" class="page-btn active">Page 1</button>
+                        <button onclick="switchPage('images/cert-page2.jpg', this)" class="page-btn">Page 2</button>
                     </div>
                 </div>
 
@@ -275,14 +275,14 @@
                     
                     <div class="cert-buttons">
                         <button onclick="openModal(document.getElementById('certDisplay').src)" class="btn-small fill font-orbitron">View Work</button>
-                        <a href="https://learn.saylor.org" target="_blank" class="btn-small outline font-orbitron text-xs sm:text-sm">Verify ID: 3096369185HD</a>
+                        <a href="https://learn.saylor.org/admin/tool/certificate/index.php" target="_blank" class="btn-small outline font-orbitron text-xs sm:text-sm">Verify ID: 3096369185HD</a>
                     </div>
                 </div>
             </div>
 
             <div class="cert-box">
                 <div class="cert-img-container">
-                    <img src="cert-word-page1.jpg" id="wordDisplay" alt="Microsoft Office Specialist" onclick="openModal(this.src)">
+                    <img src="images/cert-word-page1.jpg" id="wordDisplay" alt="Microsoft Office Specialist" onclick="openModal(this.src)">
                 </div>
 
                 <div class="cert-label text-left md:text-left">
@@ -330,9 +330,8 @@
         // Function para isara ang modal kapag kinlik ang close button o sa labas ng image
         function closeModal(event) {
             const modal = document.getElementById('certModal');
-            const fullImg = document.getElementById('imgFull');
             
-            // Isasara lang ang modal kung ang kinlik ay ang background o ang X button (hindi yung mismong certificate image)
+            // Isasara lang ang modal kung ang kinlik ay ang background o ang X button
             if (event.target === modal || event.target.classList.contains('close')) {
                 modal.style.display = "none";
             }
