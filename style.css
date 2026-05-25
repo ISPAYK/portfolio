@@ -1,4 +1,6 @@
-/* --- GLOBAL & INITIAL SETUP --- */
+/* ==========================================================================
+   GLOBAL & INITIAL SETUP
+   ========================================================================== */
 html {
     overflow-y: scroll;
     background-color: #0b0c10; /* Sinisiguro na pati html base ay dark */
@@ -14,7 +16,7 @@ html {
 }
 
 body {
-    background-color: #0b0c10 !important; /* Force dark background gaya ng Tech Stack mo */
+    background-color: #0b0c10; 
     color: #fff;
     overflow-x: hidden;
     min-height: 100vh;
@@ -25,7 +27,9 @@ body.hidden-scroll {
     overflow: hidden;
 }
 
-/* --- 1. SPLASH SCREEN (Introduction) --- */
+/* ==========================================================================
+   1. SPLASH SCREEN (Introduction)
+   ========================================================================== */
 .splash-screen {
     position: fixed;
     top: 0;
@@ -90,7 +94,9 @@ body.hidden-scroll {
 .ring-top { width: 500px; height: 500px; top: -10%; left: -10%; }
 .ring-bottom { width: 600px; height: 600px; bottom: -15%; right: -10%; }
 
-/* --- 2. MAIN CONTENT TRANSITION --- */
+/* ==========================================================================
+   2. MAIN CONTENT TRANSITION
+   ========================================================================== */
 .main-content {
     opacity: 0; 
     transition: opacity 1s ease;
@@ -100,9 +106,10 @@ body.hidden-scroll {
     opacity: 1;
 }
 
-/* --- 3. FIXED HEADER (STABLE & DYNAMIC) --- */
+/* ==========================================================================
+   3. FIXED HEADER (STABLE & DYNAMIC)
+   ========================================================================== */
 :root {
-    /* Ang variables na ito ang babaguhin ng JS tuwing mag-ta-tap ka */
     --nav-glow: #ff007f; /* Solid pink consistent color */
     --nav-secondary: rgba(255, 0, 127, 0.4); 
 }
@@ -171,29 +178,29 @@ body.about-page { background-color: #080808; }
     font-weight: 500;
 }
 
-/* --- NAVIGATION GLOW (ACTIVE AT HOVER STATES NAKA-PILL AT TUGMA SA ABOUT ME) --- */
+/* --- NAVIGATION GLOW (ACTIVE AT HOVER STATES NAKA-PILL) --- */
 .navbar a:hover, 
 .navbar a.active {
-    background: #ff007f !important; /* Solid pink button */
+    background: #ff007f !important; /* Pinanatili ang important para ma-override ang Tailwind classes */
     color: #fff !important;
     padding: 0.5rem 1.2rem;
     border-radius: 9999px;
     font-weight: 700; 
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6) !important; /* Swabeng neon glow */
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6) !important; 
     transform: translateY(-3px); /* Bahagyang pag-angat */
 }
 
 /* ==========================================================================
-   HOME HERO SECTION MODIFIED CODES (PINALIIT AT IPINWERSA ANG SIZE)
+   4. HOME HERO SECTION (DESKTOP)
    ========================================================================== */
 .home {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: calc(100vh - 80px);
-    padding: 120px 10% 2rem 10% !important;
-    gap: 50px !important;
-    width: 100% !important;
+    padding: 120px 10% 2rem 10%;
+    gap: 50px;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     animation: backgroundShift 10s infinite;
@@ -202,34 +209,34 @@ body.about-page { background-color: #080808; }
 
 /* KONTROLADO AT PINALIIT NA CONTAINER */
 .home-img {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 220px !important;      /* PINALIIT NA SUKAT SA DESKTOP */
-    height: 220px !important;     /* PINALIIT NA SUKAT SA DESKTOP */
-    max-width: 220px !important;
-    max-height: 220px !important;
-    flex-shrink: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;      
+    height: 220px;     
+    max-width: 220px;
+    max-height: 220px;
+    flex-shrink: 0;
     animation: floatContainer 5s ease-in-out infinite;
 }
 
 /* Perfect at malinis na bilog ng profile picture */
 .img-frame {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 50% !important;
-    border: 4px solid #ff007f !important;
-    box-shadow: 0 0 25px rgba(255, 0, 127, 0.6) !important;
-    overflow: hidden !important;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid #ff007f;
+    box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+    overflow: hidden;
     animation: neonBorderShift 10s infinite;
 }
 
 .img-frame img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: top center !important; /* INAYOS: Tinutulak paitaas para siguradong kitang-kita ang buhok mo */
-    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center; 
+    display: block;
 }
 
 .home-content-left, 
@@ -275,7 +282,9 @@ body.about-page { background-color: #080808; }
     transform: scale(1.05);
 }
 
-/* --- 4. UNIFORM SECTIONS --- */
+/* ==========================================================================
+   5. UNIFORM SECTIONS & TECH STACK GRID
+   ========================================================================== */
 section {
     min-height: 100vh;
     padding: 100px 10% 2rem; 
@@ -295,35 +304,32 @@ section {
     animation: textColorShift 10s infinite;
 }
 
-/* --- TECH STACK GRID --- */
 .grid {
     display: grid;
     gap: 1.5rem;
 }
 
-/* --- KEY / CARD STYLE (Ibinalik sa Magandang Sukat) --- */
 .key {
     position: relative;
-    width: 100%; /* Sumunod sa grid cell width */
-    height: 160px; /* Tamang taas para sa orihinal mong layout */
+    width: 100%; 
+    height: 160px; 
     cursor: pointer;
     perspective: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #111827 !important; /* bg-gray-900 */
-    border: 1px solid #374151; /* border-gray-700 */
+    background: #111827; 
+    border: 1px solid #374151; 
     border-radius: 12px;
     transition: all 0.3s ease;
     overflow: hidden;
 }
 
 .key-info {
-    display: none; /* Para sa JavaScript Modal mo */
+    display: none; 
 }
 
-/* --- KEYCAP / ICON CONTAINER --- */
 .keycap {
     width: 100%;
     height: 100%;
@@ -334,9 +340,8 @@ section {
     z-index: 1;
 }
 
-/* Icons at Images (Sakto ang laki, hindi siksik) */
 .keycap i {
-    font-size: 50px !important; /* Laking orihinal */
+    font-size: 50px; 
 }
 
 .keycap img {
@@ -345,22 +350,20 @@ section {
     object-fit: contain;
 }
 
-/* --- INTERACTIVE EFFECTS (Keyboard Press & Glow) --- */
 .key:hover {
-    transform: translateY(-4px); /* Umaangat ng konti pag hover */
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); /* May pink glow ang paligid */
+    transform: translateY(-4px); 
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); 
 }
 
-/* Kung anong section color (Pink/Blue/Green), yun ang mag-g-glow sa border */
-.key.hover\:border-pink-500:hover { border-color: #ec4899 !important; }
-.key.hover\:border-blue-500:hover { border-color: #3b82f6 !important; }
-.key.hover\:border-green-500:hover { border-color: #22c55e !important; }
+/* Interactive Border Glows */
+.key.border-pink-glow:hover { border-color: #ec4899; }
+.key.border-blue-glow:hover { border-color: #3b82f6; }
+.key.border-green-glow:hover { border-color: #22c55e; }
 
-/* --- THE OVERLAY EFFECT (Yung text na lumalabas sa Hover) --- */
 .key-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(3, 7, 18, 0.95); /* bg-gray-950/95 */
+    background: rgba(3, 7, 18, 0.95); 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -377,10 +380,10 @@ section {
 }
 
 .key:hover .keycap {
-    opacity: 0.1; /* Lumalabo ang icon sa likod ng overlay */
+    opacity: 0.1; 
 }
 
-/* --- MOBILE POPUP MODAL --- */
+/* --- MOBILE POPUP MODAL (TECH STACK) --- */
 .mobile-modal {
     display: none;
     position: fixed;
@@ -395,7 +398,7 @@ section {
     align-items: center;
 }
 
-.modal-content {
+.mobile-modal .modal-content {
     background: #1a1a1a;
     color: #fff;
     padding: 30px;
@@ -403,12 +406,11 @@ section {
     border: 2px solid #ff007f; 
     text-align: center;
     width: 90%;
-    max-width: 400px; /* Mas malapad nang kaunti para sa description */
+    max-width: 400px; 
     box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
     position: relative;
 }
 
-/* Inayos ang Icon sa loob ng Modal */
 #modalBody div i, #modalBody div img {
     font-size: 6rem;
     margin-bottom: 1rem;
@@ -423,7 +425,15 @@ section {
     cursor: pointer;
 }
 
-/* --- 6. CERTIFICATIONS & MODALS (GINAWANG TECH STACK STYLE) --- */
+/* ==========================================================================
+   6. CERTIFICATIONS & MODALS
+   ========================================================================== */
+.certifications {
+    padding: 100px 10% 4rem 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .cert-container {
     display: flex;
     justify-content: center;
@@ -434,28 +444,21 @@ section {
 
 .cert-box {
     max-width: 450px;
-    background: #111827 !important; /* Binago: Parehong bg-gray-900 ng techstack */
+    background: #111827; 
     padding: 1.5rem;
-    border-radius: 12px; /* Binago: 12px round corners para katulad ng keycards niyo */
+    border-radius: 12px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: 1px solid #374151; /* Binago: border-gray-700 para malinis tingnan sa una */
+    border: 1px solid #374151; 
     transition: all 0.3s ease;
 }
 
-/* Kopyang-kopya ang hover effect mula sa iyong Tech Stack key:hover */
 .cert-box:hover {
-    border-color: #ec4899 !important; /* border-pink-500 katulad ng techstack mo */
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); /* Swabeng pink glow, hindi sabog */
-    transform: translateY(-4px); /* Umaangat ng saktong 4px katulad ng panel panels mo */
-}
-
-.certifications {
-    padding: 100px 10% 4rem 10%;
-    max-width: 1200px;
-    margin: 0 auto;
+    border-color: #ec4899; 
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); 
+    transform: translateY(-4px); 
 }
 
 .cert-label {
@@ -479,13 +482,6 @@ section {
 
 .cert-label strong {
     color: #fff;
-}
-
-.cert-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.2rem;
-    flex-wrap: wrap;
 }
 
 .cert-img-container {
@@ -530,18 +526,24 @@ section {
     transition: 0.3s;
 }
 
-/* Binago ang pangalan mula sa .active para hindi mag-conflict sa navbar mo */
 .page-btn.page-active {
     background: #ff007f;
     font-weight: bold;
 }
 
-.cert-buttons { display: flex; gap: 10px; justify-content: center; }
+.cert-buttons { 
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
 .btn-small { padding: 8px 16px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
 .btn-small.fill { background: #ff007f; color: #fff; border: none; }
 .btn-small.outline { background: transparent; border: 1px solid #ff007f; color: #ff007f; }
 
-/* --- MOBILE POPUP MODAL (TECH STACK MODAL STYLE) --- */
+/* General Image Pop Modals */
 .modal {
     display: none;
     position: fixed;
@@ -555,20 +557,22 @@ section {
     align-items: center;
 }
 
-.modal-content { 
+.modal .modal-content { 
     max-width: 80%; 
     max-height: 85%; 
-    border-radius: 20px; /* Mas pabilog na kanto katulad ng techstack mo */
+    border-radius: 20px; 
     border: 2px solid #ff007f; 
-    box-shadow: 0 0 30px rgba(255, 0, 127, 0.3); /* May glow effect na rin ang modal niyo */
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.3); 
 }
 .close { position: absolute; top: 20px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-/* --- CONTACT SECTION STYLE (SAME STYLE MULA SA TECH STACK AT ABOUT ME) --- */
+/* ==========================================================================
+   7. CONTACT SECTION & SOCIAL LINKS
+   ========================================================================== */
 .contact-section {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
-    background: #0b0c10; /* Match sa body background */
+    background: #0b0c10; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -588,7 +592,7 @@ section {
 
 .contact-section h2 span {
     color: #ff007f; 
-    animation: textColorShift 10s infinite; /* Consistent animation */
+    animation: textColorShift 10s infinite; 
 }
 
 .contact-subtitle {
@@ -605,7 +609,6 @@ section {
     align-items: start;
 }
 
-/* Glassmorphism Form Card */
 .contact-form {
     background: rgba(255, 255, 255, 0.03); 
     backdrop-filter: blur(15px);
@@ -634,7 +637,6 @@ section {
     transition: 0.3s ease;
 }
 
-/* Neon Glow on Focus */
 .contact-form input:focus, 
 .contact-form textarea:focus {
     border-color: #ff007f;
@@ -647,7 +649,6 @@ section {
     margin-bottom: 2rem;
 }
 
-/* Button na parang Keyboard Key */
 .btn-send {
     display: inline-block;
     padding: 1.5rem 4rem;
@@ -672,7 +673,6 @@ section {
     box-shadow: 0 1px 0 #ad0056;
 }
 
-/* --- HIGH STABILITY SOCIAL LINKS (TECH STACK BLOCK CARD STYLE) --- */
 .contact-info h3 {
     font-size: 2.8rem;
     color: #fff;
@@ -689,23 +689,23 @@ section {
 .social-icons a {
     display: flex;
     align-items: center;
-    gap: 2rem; /* Distansya ng icon sa mismong text */
-    width: 100%; /* Pwersadong mahaba para sakupin ang buong space katulad ng cards mo */
-    padding: 1.2rem 2rem; /* Makapal at solid na card structures */
+    gap: 2rem; 
+    width: 100%; 
+    padding: 1.2rem 2rem; 
     background: #161b22; 
-    border-radius: 16px; /* Swabeng kurbada kapareho ng Tech Stack cards mo */
+    border-radius: 16px; 
     border: 1px solid #30363d;
     text-decoration: none;
     box-sizing: border-box;
-    transition: all 0.3s ease; /* Swabeng 0.3s transition para sa translateY at glow */
+    transition: all 0.3s ease; 
 }
 
 .social-icons a .icon {
-    font-size: 2.5rem; /* Malaki at malinaw na social brand icon sizing */
+    font-size: 2.5rem; 
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0; /* Anti-distort shield para hindi mapipi ang icon square box natin */
+    flex-shrink: 0; 
 }
 
 .social-icons a i {
@@ -717,62 +717,42 @@ section {
     font-size: 1.8rem;
     font-weight: 500;
     color: #fff;
-    opacity: 1; /* Permanenteng litaw ang text name simula pa lang */
-    white-space: nowrap; /* Hinding-hindi papayagang mahati o bumaba ang salita kahit kailan */
+    opacity: 1; 
+    white-space: nowrap; 
 }
 
-/* --- BRAND HOVER EFFECTS: MATITINDING NEON BACKGROUND GLOWS --- */
+/* Brand Hover States */
 .social-icons a.facebook:hover {
     border-color: #1877F2;
-    background: rgba(24, 119, 242, 0.05);
-    box-shadow: 0 0 25px rgba(24, 119, 242, 0.5);
-    transform: translateY(-5px); /* Smooth rise action paitaas katulad ng panel lines mo */
+    background: #1877F2;
+    box-shadow: 0 0 25px rgba(24, 119, 242, 0.7);
+    transform: translateY(-5px); 
 }
 
 .social-icons a.instagram:hover {
     border-color: #E4405F;
-    background: rgba(228, 64, 95, 0.05);
-    box-shadow: 0 0 25px rgba(228, 64, 95, 0.5);
+    background: #E4405F;
+    box-shadow: 0 0 25px rgba(228, 64, 95, 0.7);
     transform: translateY(-5px);
 }
 
 .social-icons a.linkedin:hover {
     border-color: #0077B5;
-    background: rgba(0, 119, 181, 0.05);
-    box-shadow: 0 0 25px rgba(0, 119, 181, 0.5);
-    transform: translateY(-5px);
-}
-
-.social-icons a.github:hover {
-    border-color: #ff007f; /* Pink terno glow para sa global profile branding mo */
-    background: rgba(255, 0, 127, 0.05);
-    box-shadow: 0 0 25px rgba(255, 0, 127, 0.5);
-    transform: translateY(-5px);
-}
-
-.social-icons a:hover span {
-    opacity: 1;
-}
-
-/* Brand Colors with Neon Glow */
-.social-icons a.facebook:hover {
-    background: #1877F2;
-    box-shadow: 0 0 25px rgba(24, 119, 242, 0.7);
-}
-.social-icons a.instagram:hover {
-    background: #E4405F;
-    box-shadow: 0 0 25px rgba(228, 64, 95, 0.7);
-}
-.social-icons a.linkedin:hover {
     background: #0077B5;
     box-shadow: 0 0 25px rgba(0, 119, 181, 0.7);
-}
-.social-icons a.github:hover {
-    background: #333;
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
 }
 
-/* --- 7. ANIMATIONS KEYFRAMES --- */
+.social-icons a.github:hover {
+    border-color: #ff007f; 
+    background: #333;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+/* ==========================================================================
+   8. ANIMATION KEYFRAMES
+   ========================================================================== */
 @keyframes neonBorderShift {
     0%, 45%, 100% { border-color: #ff007f; box-shadow: 0 0 25px #ff007f, inset 0 0 10px #ff007f; }
     50%, 95% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000, inset 0 0 10px #ff0000; }
@@ -798,205 +778,41 @@ section {
     50% { transform: translateY(-15px); }
 }
 
-/* --- 8. RESPONSIVE BREAKPOINTS (INAYOS ANG ORDER PARA SA LAHAT NG PAGES SA CP) --- */
-@media (max-width: 768px) {
-    .header { 
-        height: auto !important;
-        padding: 1rem 5% !important; 
-        flex-direction: column !important; 
-        gap: 0.8rem !important; 
-        background: rgba(11, 12, 16, 0.95) !important; /* Solid dark bar para walang lumalampas na text */
-    }
-    .navbar { 
-        gap: 10px !important; 
-        flex-wrap: wrap !important; 
-        justify-content: center !important; 
-    }
-    .navbar a { 
-        font-size: 14px !important; 
-        padding: 6px 12px !important; 
-    }
-    .navbar a:hover, 
-    .navbar a.active {
-        padding: 6px 12px !important;
-    }
-
-    /* --- HOME SECTION MOBILE SETTINGS --- */
-    .home { 
-        flex-direction: column !important; 
-        text-align: center !important; 
-        padding-top: 190px !important; /* Safe zone mula sa wrap header */
-        gap: 2rem !important; 
-        justify-content: flex-start !important;
-    }
-
-    /* Unahin ang mukha mo sa taas at kontrolin ang sukat */
-    .home-img { 
-        order: 1 !important; 
-        width: 150px !important;
-        height: 150px !important;
-        max-width: 150px !important;
-        max-height: 150px !important;
-        margin: 0 auto !important; 
-    }
-    .img-frame { 
-        width: 100% !important; 
-        height: 100% !important; 
-    }
-
-    /* Bababa sa ilalim ng mukha ang mga text blocks para iwas overlapping */
-    .home-content-left { 
-        order: 2 !important; 
-        text-align: center !important; 
-    }
-    .home-content-left h1 {
-        font-size: 1.8rem !important; 
-        min-height: auto !important;
-    }
-    .home-content-left .name {
-        font-size: 2.2rem !important;
-        min-height: auto !important;
-    }
-
-    .home-content-right {
-        order: 3 !important; 
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-    }
-    .home-content-right h3 {
-        font-size: 1.8rem !important;
-    }
-
-    /* --- ABOUT / GENERAL SECTION HEADINGS --- */
-    section {
-        padding: 180px 6% 2rem !important; /* Tinitiyak na hindi matatakpan ang pamagat ng kahit anong section sa mobile */
-    }
-    .heading { 
-        font-size: 2.6rem !important; 
-        margin-bottom: 2rem !important;
-    }
-
-    /* --- TECH STACK MOBILE VIEW --- */
-    .tech-card-v { flex-direction: column !important; text-align: center !important; }
-    .keyboard-base {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)) !important; 
-        padding: 15px !important;
-        gap: 10px !important;
-    }
-    .key {
-        width: 70px !important;
-        height: 70px !important;
-    }
-    .keycap i, .keycap img {
-        font-size: 30px !important;
-    }
-
-    /* --- CERTIFICATIONS MOBILE VIEW --- */
-    .cert-container {
-        gap: 1.5rem !important;
-    }
-    .cert-box {
-        max-width: 100% !important;
-        padding: 1.2rem !important;
-    }
-    .cert-img-container {
-        height: 180px !important;
-    }
-
-    /* --- CONTACT SECTION MOBILE VIEW (FIXED WRAPPER & SPACE) --- */
-    .contact-section {
-        padding-top: 180px !important;
-    }
-    .contact-subtitle {
-        font-size: 1.2rem !important;
-        margin-bottom: 2.5rem !important;
-    }
-    .contact-wrapper {
-        grid-template-columns: 1fr !important; /* Isang vertical layout na lang para kasya sa CP */
-        gap: 3rem !important;
-    }
-    .contact-form {
-        padding: 2rem !important; /* Pinaliit ang padding para hindi lumampas sa screen */
-        border-radius: 1.5rem !important;
-    }
-    .input-box {
-        grid-template-columns: 1fr !important; /* Isang column na lang ang form fields */
-        gap: 1.2rem !important;
-    }
-    .contact-form input, 
-    .contact-form textarea {
-        padding: 1.2rem !important;
-        font-size: 1.2rem !important;
-    }
-    .btn-send {
-        padding: 1.2rem 3rem !important;
-        font-size: 1.4rem !important;
-        width: 100% !important; /* Sakop ang buong lapad para madaling i-tap */
-    }
-    .contact-info h3 {
-        font-size: 2rem !important;
-        text-align: center !important;
-    }
-    .social-icons a {
-        padding: 1rem 1.5rem !important;
-        gap: 1.2rem !important;
-    }
-    .social-icons a i,
-    .social-icons a .icon {
-        font-size: 1.8rem !important;
-    }
-    .social-icons a span {
-        font-size: 1.3rem !important;
-    }
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
-@media (max-width: 991px) {
-    .contact-wrapper {
-        grid-template-columns: 1fr;
-    }
-    .contact-info {
-        text-align: center;
-    }
-    .social-icons {
-        justify-content: center;
-    }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 600px) {
-    .input-box {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* --- 9. TEXT & TYPEWRITER ANIMATIONS --- */
+/* ==========================================================================
+   9. TEXT, TYPEWRITER EFFECTS & ELEMENT REVEALS
+   ========================================================================== */
 .animate-text {
-    opacity: 1; /* INAYOS: Binago sa 1 para hindi maging invisible kung walang IntersectionObserver Script */
-    transform: translateY(0); /* INAYOS: Ibinalik sa normal ang pwesto */
+    opacity: 1; 
+    transform: translateY(0); 
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: opacity, transform;
 }
 
-/* Force visible ang typewriter container para hindi blanko ang screen */
 .typewriter-container.animate-text {
     opacity: 1 !important;
     transform: none !important;
 }
 
-/* State kapag "In View" (Papasok) */
 .animate-text.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* State kapag "Out" (Lalabas paitaas) */
 .animate-text.exit {
     opacity: 0;
     transform: translateY(-30px);
 }
 
-/* --- TYPEWRITER SPECIFIC STYLES --- */
 .typewriter-container {
     min-height: 120px; 
     display: flex;
@@ -1007,7 +823,7 @@ section {
 .typewriter-container h1 {
     min-height: 1.2em;
     display: block;
-    color: #fff; /* Siguraduhin na puti ang kulay */
+    color: #fff; 
 }
 
 /* Ang Blinking Cursor (|) */
@@ -1021,34 +837,182 @@ section {
     vertical-align: middle;
 }
 
-/* Cursor Blink Animation */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* --- OPTIONAL: REVEAL CLASS --- */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .reveal {
     animation: fadeInUp 1s forwards;
 }
 
-/* Delay para sa image para mas swabe ang transition */
 .home-img.animate-text {
     transition-delay: 0.3s;
-    opacity: 1; /* INAYOS: Default to 1 para litaw agad pagkatapos ng Splash Screen */
+    opacity: 1; 
 }
 
 .home-img.animate-text.show {
-    opacity: 1; /* Lilitaw lang pag 'show' na */
+    opacity: 1; 
+}
+
+/* ==========================================================================
+   10. RESPONSIVE BREAKPOINTS (Mobile Adjustments)
+   ========================================================================== */
+@media (max-width: 991px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .header { 
+        height: auto;
+        padding: 1rem 5%; 
+        flex-direction: column; 
+        gap: 0.8rem; 
+        background: rgba(11, 12, 16, 0.95); 
+    }
+    .navbar { 
+        gap: 10px; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+    .navbar a { 
+        font-size: 14px; 
+        padding: 6px 12px; 
+    }
+    .navbar a:hover, 
+    .navbar a.active {
+        padding: 6px 12px;
+    }
+
+    /* --- HOME SECTION MOBILE --- */
+    .home { 
+        flex-direction: column; 
+        text-align: center; 
+        padding-top: 190px; 
+        gap: 2rem; 
+        justify-content: flex-start;
+    }
+
+    .home-img { 
+        order: 1; 
+        width: 150px;
+        height: 150px;
+        max-width: 150px;
+        max-height: 150px;
+        margin: 0 auto; 
+    }
+
+    .home-content-left { 
+        order: 2; 
+        text-align: center; 
+    }
+    .home-content-left h1 {
+        font-size: 1.8rem; 
+        min-height: auto;
+    }
+    .home-content-left .name {
+        font-size: 2.2rem;
+        min-height: auto;
+    }
+
+    .home-content-right {
+        order: 3; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .home-content-right h3 {
+        font-size: 1.8rem;
+    }
+
+    /* --- GENERAL SECTIONS --- */
+    section {
+        padding: 180px 6% 2rem; 
+    }
+    .heading { 
+        font-size: 2.6rem; 
+        margin-bottom: 2rem;
+    }
+
+    /* --- TECH STACK MOBILE --- */
+    .keyboard-base {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); 
+        padding: 15px;
+        gap: 10px;
+    }
+    .key {
+        width: 70px;
+        height: 70px;
+    }
+    .keycap i, .keycap img {
+        font-size: 30px;
+    }
+
+    /* --- CERTIFICATIONS MOBILE --- */
+    .cert-container {
+        gap: 1.5rem;
+    }
+    .cert-box {
+        max-width: 100%;
+        padding: 1.2rem;
+    }
+    .cert-img-container {
+        height: 180px;
+    }
+
+    /* --- CONTACT MOBILE --- */
+    .contact-section {
+        padding-top: 180px;
+    }
+    .contact-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2.5rem;
+    }
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .contact-form {
+        padding: 2rem; 
+        border-radius: 1.5rem;
+    }
+    .input-box {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .contact-form input, 
+    .contact-form textarea {
+        padding: 1.2rem;
+        font-size: 1.2rem;
+    }
+    .btn-send {
+        padding: 1.2rem 3rem;
+        font-size: 1.4rem;
+        width: 100%; 
+    }
+    .contact-info h3 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    .social-icons a {
+        padding: 1rem 1.5rem;
+        gap: 1.2rem;
+    }
+    .social-icons a i,
+    .social-icons a .icon {
+        font-size: 1.8rem;
+    }
+    .social-icons a span {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .input-box {
+        grid-template-columns: 1fr;
+    }
 }
